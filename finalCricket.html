@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Cricket Project</title>
+	<link rel="stylesheet" type="text/css" href="finalCricketcss.css">
+</head>
+<body>
+
+  <h1 id="heading">Bat Ball Stump Game</h1>
+  <p class="result_dis" id="result">RESULT</p>
+   
+
+
+
+
+  <button onclick="
+      let computerchoice=generateComputerChoice()
+      let resultMsg=generateMsg('bat',computerchoice)
+      showResult('bat',computerchoice,resultMsg)">
+        <img class="img-js" src="C:\Users\johnM\OneDrive\Documents\criketIMAGE\bat.jpg" alt="bat">
+ </button>
+
+  <button onclick="
+       computerchoice=generateComputerChoice()
+       let resultMsg=generateMsg('ball',computerchoice) 
+       showResult('Ball',computerchoice,resultMsg)">
+          <img class="img-js" src="C:\Users\johnM\OneDrive\Documents\criketIMAGE\ball.jpg" alt="bat">
+  </button>
+
+
+
+  <button onclick="
+      computerchoice=generateComputerChoice()
+      let resultMsg=generateMsg('stump',computerchoice)
+      showResult('stump',computerchoice,resultMsg)">
+          <img class="img-js"   src="C:\Users\johnM\OneDrive\Documents\criketIMAGE\stump.jpg" alt="stump">
+  </button>
+
+  <div>
+     <button class="clearButton" onclick="localStorage.clear() ">clearButton</button>    
+  </div>
+ 
+  
+<script type="text/javascript">
+  
+   let getscore=localStorage.getItem('score');
+   console.log(`gets score is ${getscore}`)
+   let score;
+   console.log("value of getscore",getscore)
+   resetscore(getscore)
+
+   function resetscore(getscore)
+   {
+     // score=JSON.parse(getscore) || {
+    score=getscore ? JSON.parse(getscore) :{
+               won:0,
+                lost:0,
+                tie:0,
+
+   };
+   score.displayscore=function(){
+      return `no of matches won:${score.won},lost${score.lost},tie${score.tie}`
+    };
+
+   }
+   // let score=JSON.parse(getscore) || {
+   //             won:0,
+   //              lost:0,
+   //              tie:0,
+
+   // }
+
+
+ //   if(getscore !==undefined)
+ //     {
+ //      score=JSON.parse(getscore)
+ //     }
+ //   else
+ //   {
+ //            score={
+ //              won:0,
+ //                lost:0,
+ //                tie:0,
+ //   };
+ // }
+   // score.displayscore=function(){
+   //    return `no of matches won:${score.won},lost${score.lost},tie${score.tie}`
+   //  };
+    
+
+
+  function generateComputerChoice()
+  {
+    let randomvalue=Math.random() * 3;
+    if(randomvalue>0 && randomvalue <= 1)
+      {
+        return 'bat';
+         
+      }
+    else if(randomvalue > 1 && randomvalue <= 2)
+      {
+        return 'ball'
+      }
+    else
+      {
+        return 'stump';
+      }
+      
+  }
+
+  function generateMsg(userchoice,computerchoice)
+  {
+    if(userchoice==='bat')
+    {
+          if(computerchoice==='bat')
+          {
+            score.tie++;
+            return `it's tie`
+          }
+          else if(computerchoice==='ball'){
+            score.won++;
+            return 'You have won'
+          }
+          else(computerchoice==='stump')
+          {
+            score.lost++;
+            return 'Computer won'
+          }
+    }
+    else if(userchoice==='ball')
+    {
+          if(computerchoice==='bat')
+          {
+             score.lost++;
+            return 'computer won'
+          }
+          else if(computerchoice==='ball')
+          {
+            score.tie++;
+            return `it's a tie`
+           }
+          else(computerchoice==='stump')
+          {
+            score.won++;
+            return 'user won'
+          }
+        }
+    else
+    {
+          if(computerchoice==='stump')
+          {
+            score.tie++;
+            return `it's a tie`
+          }
+          else if(computerchoice==='ball')
+          {
+            score.lost++;
+            return 'computer won'
+           }
+          else(computerchoice==='bat')
+          {
+            score.won++;
+            return 'user won'
+          }
+          
+        }
+  }
+
+
+  function showResult(usermove,computerchoice,resultMsg)
+  {
+    let localvalue=localStorage.setItem('score',JSON.stringify(score))
+    console.log('local value is ',localvalue)
+
+    let result_display=document.querySelector(".result_dis")
+    result_display.innerText=`you have choosen ${usermove}, computer choice is ${computerchoice} and ${resultMsg}
+
+       ${score.displayscore()}
+       `
+
+
+
+
+    // alert(`you have choosen ${usermove}, computer choice is ${computerchoice} and ${resultMsg}
+
+    //    ${score.displayscore()}
+    //    `)
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+body{
+	background:#777;
+	tex-align:center;
+
+}
+#heading{
+	display:flex;
+	justify-content:center;
+	text-aling:center;
+	color:orange;
+}
+#result{
+	display:flex;
+	justify-content:center;
+	font-size:40px;
+	color:brown;
+	text-align:center;
+}
+
+.img-js{
+  display: block;
+ 	cursor:pointer; 
+ 	width:270px;	 
+	height:250px;
+	border:none;
+}
+
+.clearButton{
+	display:flex;
+	align-items:center;
+	font-size:34px;
+	color:#123;
+	background:green;
+	border-radius:4px;
+	position:absolute;
+	bottom:8%;
+	right:60%;
+	 
+}
+
+ 
